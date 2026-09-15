@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 640" width="1140" height="640"
+     font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2b2b2b"/>
+    </marker>
+    <marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7B3FB8"/>
+    </marker>
+    <style>
+      .sig   { font-family: Consolas, Menlo, 'Courier New', monospace; font-size: 13px; fill: #2b2b2b; }
+      .sigg  { font-family: Consolas, Menlo, 'Courier New', monospace; font-size: 13px; fill: #7B3FB8; font-weight: 700; }
+      .title { font-family: Consolas, Menlo, 'Courier New', monospace; font-size: 16px; font-weight: 700; fill: #1d1d1d; }
+      .sub   { font-size: 12px; fill: #444; }
+      .clk   { font-size: 11px; fill: #777; font-style: italic; }
+      .dom   { font-size: 14px; font-weight: 700; letter-spacing: 1.5px; }
+      .small { font-size: 11px; fill: #555; }
+    </style>
+  </defs>
+
+  <rect width="1140" height="640" fill="#ffffff"/>
+
+  <!-- ============ domenii de ceas ============ -->
+  <rect x="90"  y="40" width="470" height="520" rx="14" fill="#EAF2FB" stroke="#8DB3DE" stroke-width="1.5"/>
+  <rect x="580" y="40" width="470" height="520" rx="14" fill="#FDF0E3" stroke="#E5AE7A" stroke-width="1.5"/>
+
+  <text x="325" y="70" text-anchor="middle" class="dom" fill="#2F6DB5">DOMENIUL DE SCRIERE</text>
+  <text x="325" y="88" text-anchor="middle" class="clk">wr_clk</text>
+  <text x="815" y="70" text-anchor="middle" class="dom" fill="#C76B1A">DOMENIUL DE CITIRE</text>
+  <text x="815" y="88" text-anchor="middle" class="clk">rd_clk</text>
+
+  <!-- granița CDC -->
+  <line x1="570" y1="30" x2="570" y2="572" stroke="#9a9a9a" stroke-width="1.5" stroke-dasharray="7 6"/>
+  <rect x="435" y="572" width="270" height="24" rx="12" fill="#ffffff" stroke="#bbbbbb"/>
+  <text x="570" y="589" text-anchor="middle" class="small">graniță între domenii de ceas (CDC)</text>
+
+  <!-- ============ wr_ptr_full ============ -->
+  <rect x="130" y="110" width="190" height="140" rx="8" fill="#ffffff" stroke="#2F6DB5" stroke-width="2"/>
+  <text x="225" y="140" text-anchor="middle" class="title">wr_ptr_full</text>
+  <text x="225" y="166" text-anchor="middle" class="sub">pointer binar (wbin)</text>
+  <text x="225" y="184" text-anchor="middle" class="sub">pointer Gray (wptr_gray)</text>
+  <text x="225" y="202" text-anchor="middle" class="sub">calculează full</text>
+  <text x="225" y="238" text-anchor="middle" class="clk">@ wr_clk</text>
+
+  <!-- ============ rd_ptr_empty ============ -->
+  <rect x="820" y="110" width="190" height="140" rx="8" fill="#ffffff" stroke="#C76B1A" stroke-width="2"/>
+  <text x="915" y="140" text-anchor="middle" class="title">rd_ptr_empty</text>
+  <text x="915" y="166" text-anchor="middle" class="sub">pointer binar (rbin)</text>
+  <text x="915" y="184" text-anchor="middle" class="sub">pointer Gray (rptr_gray)</text>
+  <text x="915" y="202" text-anchor="middle" class="sub">calculează empty</text>
+  <text x="915" y="238" text-anchor="middle" class="clk">@ rd_clk</text>
+
+  <!-- ============ sincronizatoare ============ -->
+  <rect x="600" y="115" width="100" height="54" rx="6" fill="#FFF6D5" stroke="#B8912A" stroke-width="2"/>
+  <text x="650" y="138" text-anchor="middle" class="title" style="font-size:14px">sync_2ff</text>
+  <text x="650" y="157" text-anchor="middle" class="small">2 FF · @ rd_clk</text>
+
+  <rect x="440" y="185" width="100" height="54" rx="6" fill="#FFF6D5" stroke="#B8912A" stroke-width="2"/>
+  <text x="490" y="208" text-anchor="middle" class="title" style="font-size:14px">sync_2ff</text>
+  <text x="490" y="227" text-anchor="middle" class="small">2 FF · @ wr_clk</text>
+
+  <!-- ============ pointeri Gray ============ -->
+  <path d="M320 142 H600" stroke="#7B3FB8" stroke-width="2.2" fill="none" marker-end="url(#arrg)"/>
+  <text x="455" y="133" text-anchor="middle" class="sigg">wptr_gray</text>
+
+  <path d="M700 142 H820" stroke="#7B3FB8" stroke-width="2.2" fill="none" marker-end="url(#arrg)"/>
+  <text x="760" y="133" text-anchor="middle" class="sigg">rq2_wptr_gray</text>
+
+  <path d="M820 212 H540" stroke="#7B3FB8" stroke-width="2.2" fill="none" marker-end="url(#arrg)"/>
+  <text x="680" y="203" text-anchor="middle" class="sigg">rptr_gray</text>
+
+  <path d="M440 212 H320" stroke="#7B3FB8" stroke-width="2.2" fill="none" marker-end="url(#arrg)"/>
+  <text x="380" y="203" text-anchor="middle" class="sigg">wq2_rptr_gray</text>
+
+  <!-- ============ fifo_mem ============ -->
+  <rect x="370" y="370" width="400" height="150" rx="8" fill="#ffffff" stroke="#555555" stroke-width="2"/>
+  <text x="570" y="395" text-anchor="middle" class="title">fifo_mem</text>
+  <text x="570" y="415" text-anchor="middle" class="small">mem[0 : DEPTH-1]</text>
+  <g stroke="#888888" stroke-width="1" fill="#F4F4F4">
+    <rect x="426" y="423" width="36" height="28"/>
+    <rect x="462" y="423" width="36" height="28"/>
+    <rect x="498" y="423" width="36" height="28"/>
+    <rect x="534" y="423" width="36" height="28"/>
+    <rect x="570" y="423" width="36" height="28"/>
+    <rect x="606" y="423" width="36" height="28"/>
+    <rect x="642" y="423" width="36" height="28"/>
+    <rect x="678" y="423" width="36" height="28"/>
+  </g>
+  <g class="small" text-anchor="middle">
+    <text x="444" y="441">0</text><text x="480" y="441">1</text><text x="516" y="441">2</text><text x="552" y="441">3</text>
+    <text x="588" y="441">4</text><text x="624" y="441">5</text><text x="660" y="441">6</text><text x="696" y="441">7</text>
+  </g>
+  <text x="385" y="485" class="small">scriere sincronă @ wr_clk</text>
+  <text x="385" y="501" class="small">când wr_en &amp;&amp; !full</text>
+  <text x="755" y="485" text-anchor="end" class="small">citire combinațională</text>
+  <text x="755" y="501" text-anchor="end" class="small">rd_data = mem[raddr]</text>
+
+  <!-- adrese -->
+  <path d="M225 250 V410 H370" stroke="#2b2b2b" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <text x="233" y="335" class="sig">waddr</text>
+  <path d="M915 250 V410 H770" stroke="#2b2b2b" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <text x="907" y="335" text-anchor="end" class="sig">raddr</text>
+
+  <!-- ============ porturi externe: scriere ============ -->
+  <path d="M86 140 H130" stroke="#2b2b2b" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <text x="80" y="144" text-anchor="end" class="sig">wr_clk</text>
+  <path d="M86 170 H130" stroke="#2b2b2b" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <text x="80" y="174" text-anchor="end" class="sig">wr_rst_n</text>
+  <path d="M86 200 H130" stroke="#2b2b2b" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <text x="80" y="204" text-anchor="end" class="sig">wr_en</text>
+  <path d="M130 230 H86" stroke="#2b2b2b" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <text x="80" y="234" text-anchor="end" class="sig" style="font-weight:700">full</text>
+  <path d="M86 460 H370" stroke="#2b2b2b" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <text x="80" y="464" text-anchor="end" class="sig">wr_data</text>
+
+  <!-- ============ porturi externe: citire ============ -->
+  <path d="M1054 140 H1010" stroke="#2b2b2b" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <text x="1060" y="144" class="sig">rd_clk</text>
+  <path d="M1054 170 H1010" stroke="#2b2b2b" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <text x="1060" y="174" class="sig">rd_rst_n</text>
+  <path d="M1054 200 H1010" stroke="#2b2b2b" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <text x="1060" y="204" class="sig">rd_en</text>
+  <path d="M1010 230 H1054" stroke="#2b2b2b" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <text x="1060" y="234" class="sig" style="font-weight:700">empty</text>
+  <path d="M770 460 H1054" stroke="#2b2b2b" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <text x="1060" y="464" class="sig">rd_data</text>
+
+  <!-- ============ legendă ============ -->
+  <line x1="100" y1="620" x2="140" y2="620" stroke="#7B3FB8" stroke-width="2.2"/>
+  <text x="148" y="624" class="small">pointer în cod Gray (un singur bit se schimbă pe pas)</text>
+  <rect x="490" y="612" width="22" height="15" rx="3" fill="#FFF6D5" stroke="#B8912A" stroke-width="1.5"/>
+  <text x="520" y="624" class="small">sincronizator cu 2 flip-flopuri</text>
+  <line x1="780" y1="620" x2="820" y2="620" stroke="#2b2b2b" stroke-width="1.6"/>
+  <text x="828" y="624" class="small">date, adrese, control</text>
+</svg>
