@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 900" width="1040" height="900"
+     font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2b2b2b"/>
+    </marker>
+    <style>
+      .sig   { font-family: Consolas, Menlo, 'Courier New', monospace; font-size: 13px; fill: #2b2b2b; }
+      .val   { font-family: Consolas, Menlo, 'Courier New', monospace; font-size: 14px; fill: #2b2b2b; }
+      .ttl   { font-size: 15px; font-weight: 700; }
+      .small { font-size: 11.5px; fill: #555; }
+      .wave  { stroke: #2b2b2b; stroke-width: 2.2; fill: none; }
+      .busr  { stroke: #2F6DB5; stroke-width: 2; fill: #EAF2FB; }
+      .edge  { stroke: #C0392B; stroke-width: 1.8; stroke-dasharray: 6 5; fill: none; }
+      .reg   { fill: #FFFFFF; stroke: #2F6DB5; stroke-width: 2.2; }
+      .syn   { fill: #FFF6D5; stroke: #B8912A; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="1040" height="900" fill="#ffffff"/>
+
+  <!-- ================= PARTEA 1: MONTAJUL ================= -->
+  <text x="30" y="34" class="ttl" fill="#333">Pointer BINAR trimis direct peste graniță (varianta care nu merge)</text>
+
+  <rect x="60" y="62" width="150" height="56" rx="4" class="reg"/>
+  <text x="135" y="86" text-anchor="middle" class="sig" style="font-weight:700">wbin</text>
+  <text x="135" y="104" text-anchor="middle" class="small">registru, fără hazarde</text>
+
+  <path d="M210 90 H466" class="wave" marker-end="url(#gr)"/>
+  <text x="338" y="80" text-anchor="middle" class="sig">4 biți, binar</text>
+
+  <line x1="400" y1="45" x2="400" y2="150" stroke="#9a9a9a" stroke-width="1.5" stroke-dasharray="7 6"/>
+  <text x="400" y="166" text-anchor="middle" class="small">graniță CDC</text>
+
+  <rect x="470" y="62" width="130" height="56" rx="6" class="syn"/>
+  <text x="535" y="86" text-anchor="middle" class="sig" style="font-weight:700">sync_2ff</text>
+  <text x="535" y="104" text-anchor="middle" class="small">4 lanțuri separate</text>
+
+  <path d="M600 90 H700" class="wave" marker-end="url(#gr)"/>
+  <text x="712" y="86" class="small">valoarea pe care domeniul de</text>
+  <text x="712" y="102" class="small">citire o folosește pentru empty</text>
+
+  <text x="60" y="150" class="small">Registrul elimină hazardele, dar nu poate face ca cei patru biți să comute în același moment: clock-to-Q diferit, skew de ceas, trasee de lungimi diferite.</text>
+
+  <!-- ================= PARTEA 2: SEMNALELE ================= -->
+  <line x1="30" y1="188" x2="1010" y2="188" stroke="#ddd" stroke-width="1"/>
+  <text x="30" y="212" class="ttl" style="font-size:13.5px" fill="#B3403A">Pasul 3 → 4 al pointerului, cu detaliu pe biți (zoom de câteva sute de ps)</text>
+
+  <text x="250" y="248" text-anchor="end" class="small">front wr_clk</text>
+
+  <text x="170" y="272" text-anchor="end" class="sig">wr_clk</text>
+  <path d="M180 278 H300 V254 H480 V278 H900" class="wave"/>
+
+  <path d="M180 306 H294 L300 321 L294 336 H180 Z" class="busr"/>
+  <text x="240" y="326" text-anchor="middle" class="val">0011</text>
+  <path d="M306 306 H900 V336 H306 L300 321 Z" class="busr"/>
+  <text x="600" y="326" text-anchor="middle" class="val">0100</text>
+  <text x="170" y="320" text-anchor="end" class="sig">wbin</text>
+  <text x="170" y="336" text-anchor="end" class="small">= 3, apoi 4</text>
+
+  <!-- banda de skew -->
+  <rect x="300" y="362" width="36" height="190" fill="#EFB4AE" opacity="0.55"/>
+  <text x="318" y="574" text-anchor="middle" class="small" fill="#C0392B">biții nu comută simultan</text>
+
+  <!-- biții -->
+  <text x="170" y="398" text-anchor="end" class="sig">wbin[3]</text>
+  <path d="M180 394 H900" class="wave"/>
+  <text x="920" y="398" class="small">0 → 0, nu se schimbă</text>
+
+  <text x="170" y="434" text-anchor="end" class="sig">wbin[2]</text>
+  <path d="M180 442 H300 V418 H900" class="wave"/>
+  <text x="920" y="434" class="small">0 → 1</text>
+
+  <text x="170" y="482" text-anchor="end" class="sig">wbin[1]</text>
+  <path d="M180 466 H318 V490 H900" class="wave"/>
+  <text x="920" y="482" class="small">1 → 0</text>
+
+  <text x="170" y="530" text-anchor="end" class="sig">wbin[0]</text>
+  <path d="M180 514 H336 V538 H900" class="wave"/>
+  <text x="920" y="530" class="small">1 → 0</text>
+
+  <!-- frontul de eșantionare + ce prinde -->
+  <path d="M310 246 V556" class="edge"/>
+  <text x="352" y="248" class="small" fill="#C0392B">front rd_clk (eșantionare)</text>
+  <circle cx="310" cy="394" r="5" fill="#C0392B"/>
+  <circle cx="310" cy="418" r="5" fill="#C0392B"/>
+  <circle cx="310" cy="466" r="5" fill="#C0392B"/>
+  <circle cx="310" cy="514" r="5" fill="#C0392B"/>
+
+  <rect x="600" y="600" width="410" height="96" rx="10" fill="#FDF3F2" stroke="#D98B85" stroke-width="1.5"/>
+  <text x="620" y="626" class="ttl" style="font-size:13.5px" fill="#B3403A">✗ se eșantionează 0 1 1 1 = 7</text>
+  <text x="620" y="650" class="small">wbin[2] deja comutat, wbin[1] și wbin[0] încă nu.</text>
+  <text x="620" y="670" class="small">Nici 3 (0011), nici 4 (0100): o valoare care n-a existat.</text>
+  <text x="620" y="690" class="small">Cititorul crede că are 7 elemente → citește locații nescrise.</text>
+
+  <text x="30" y="626" class="small">Toate cele patru forme de undă sunt curate: fiecare bit</text>
+  <text x="30" y="646" class="small">comută o singură dată, fiind ieșire de registru.</text>
+  <text x="30" y="672" class="small" fill="#C0392B" style="font-weight:700">Problema nu e murdăria semnalelor,</text>
+  <text x="30" y="690" class="small" fill="#C0392B" style="font-weight:700">ci că trei biți se mișcă în același pas.</text>
+
+  <!-- ================= PARTEA 3: ACELAȘI PAS, ÎN GRAY ================= -->
+  <line x1="30" y1="724" x2="1010" y2="724" stroke="#ddd" stroke-width="1"/>
+  <text x="30" y="748" class="ttl" style="font-size:13.5px" fill="#2F7A4D">Același pas 3 → 4, dar cu pointer Gray: 0010 → 0110</text>
+
+  <rect x="300" y="768" width="10" height="106" fill="#A9D8BA" opacity="0.8"/>
+  <path d="M310 764 V880" class="edge"/>
+
+  <text x="170" y="782" text-anchor="end" class="sig">gray[3]</text>
+  <path d="M180 778 H560" class="wave"/>
+  <circle cx="310" cy="778" r="4.5" fill="#2F7A4D"/>
+  <text x="575" y="782" class="small" fill="#2F7A4D">0, stabil</text>
+
+  <text x="170" y="818" text-anchor="end" class="sig">gray[2]</text>
+  <path d="M180 826 H300 V802 H560" class="wave"/>
+  <text x="575" y="818" class="small" fill="#C0392B">0 → 1, singurul incert</text>
+
+  <text x="170" y="852" text-anchor="end" class="sig">gray[1]</text>
+  <path d="M180 848 H560" class="wave"/>
+  <circle cx="310" cy="848" r="4.5" fill="#2F7A4D"/>
+  <text x="575" y="852" class="small" fill="#2F7A4D">1, stabil</text>
+
+  <text x="170" y="884" text-anchor="end" class="sig">gray[0]</text>
+  <path d="M180 880 H560" class="wave"/>
+  <circle cx="310" cy="880" r="4.5" fill="#2F7A4D"/>
+  <text x="575" y="884" class="small" fill="#2F7A4D">0, stabil</text>
+
+  <rect x="740" y="768" width="270" height="106" rx="10" fill="#EEF7F0" stroke="#7FB894" stroke-width="1.5"/>
+  <text x="760" y="794" class="ttl" style="font-size:13.5px" fill="#2F7A4D">✓ se eșantionează</text>
+  <text x="760" y="820" class="val" fill="#2F7A4D">0010 = 3   sau   0110 = 4</text>
+  <text x="760" y="844" class="small">Trei biți sunt stabili, deci singura</text>
+  <text x="760" y="862" class="small">necunoscută are doar două deznodăminte.</text>
+</svg>

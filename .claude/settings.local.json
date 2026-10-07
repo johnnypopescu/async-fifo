@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed -e 's|DOMENIUL DE SCRIERE|WRITE DOMAIN|' -e 's|DOMENIUL DE CITIRE|READ DOMAIN|' -e 's|graniță între domenii de ceas \\(CDC\\)|clock domain crossing \\(CDC\\) boundary|' -e 's|pointer binar|binary pointer|g' -e 's|pointer Gray \\(|Gray pointer \\(|g' -e 's|calculează full|computes full|' -e 's|calculează empty|computes empty|' -e 's|scriere sincronă @ wr_clk|synchronous write @ wr_clk|' -e 's|când wr_en|when wr_en|' -e 's|citire combinațională|combinational read|' -e 's|pointer în cod Gray \\(un singur bit se schimbă pe pas\\)|Gray-coded pointer \\(one bit changes per step\\)|' -e 's|sincronizator cu 2 flip-flopuri|2-flip-flop synchronizer|' -e 's|date, adrese, control|data, addresses, control|' docs/async_fifo_block.svg)",
+      "Bash(sed -e 's|UN SINGUR DOMENIU DE CEAS|SINGLE CLOCK DOMAIN|' -e 's|dacă do_write|if do_write|' -e 's|dacă do_read|if do_read|' -e 's|registru \\(flip-flopuri, se actualizează pe posedge clk\\)|register \\(flip-flops, updated on posedge clk\\)|' -e 's|>registru<|>register<|g' -e 's|>flag-uri<|>flags<|' -e 's|full: adrese egale|full: same address|' -e 's|și MSB diferit|and MSB differs|' -e 's|DEPTH × WIDTH biți|DEPTH × WIDTH bits|' -e 's|scriere @ clk când we = 1|write @ clk when we = 1|' -e 's|la toate registrele și la memorie|to all registers and the memory|' -e 's|reset asincron pentru wptr și rptr|async reset for wptr and rptr|' -e 's|logică combinațională|combinational logic|' -e 's|>memorie<|>memory<|' docs/sync_fifo_block.svg)",
+      "Bash(sed -e 's|pe 4 biți: 3 porți XOR, deplasarea nu costă nimic|4 bits: 3 XOR gates, the shift costs nothing|' docs/bin2gray.svg)",
+      "WebSearch",
+      "WebFetch(domain:www.sunburst-design.com)",
+      "WebFetch(domain:www.paradigm-works.com)",
+      "WebFetch(domain:twins.ee.nctu.edu.tw)"
+    ]
+  }
+}

@@ -23,7 +23,7 @@ module wr_ptr_full #(
   // Masca pentru cei doi biți de sus, ex. ADDR_W=3 -> 4'b1100
   localparam logic [ADDR_W:0] TOP2 = 3 << (ADDR_W - 1);
 
-  logic [ADDR_W:0] wbin, wbin_next, wgray_next;
+  logic [ADDR_W:0] wbin, wbin_next, wgray_next;//un bit in plus ca sa putem fface comparea intre wbin si rbin
 
   assign wbin_next  = wbin + (wr_en && !full);
   assign wgray_next = (wbin_next >> 1) ^ wbin_next;

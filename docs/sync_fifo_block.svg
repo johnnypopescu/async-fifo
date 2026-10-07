@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 650" width="1180" height="650"
+     font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2b2b2b"/>
+    </marker>
+    <style>
+      .sig   { font-family: Consolas, Menlo, 'Courier New', monospace; font-size: 13px; fill: #2b2b2b; }
+      .title { font-family: Consolas, Menlo, 'Courier New', monospace; font-size: 15px; font-weight: 700; fill: #1d1d1d; }
+      .big   { font-family: Consolas, Menlo, 'Courier New', monospace; font-size: 20px; font-weight: 700; fill: #1d1d1d; }
+      .sub   { font-size: 11px; fill: #444; }
+      .small { font-size: 11px; fill: #555; }
+      .dom   { font-size: 14px; font-weight: 700; letter-spacing: 1.5px; }
+      .w     { stroke: #2b2b2b; stroke-width: 1.6; fill: none; }
+      .comb  { fill: #E6F4EA; stroke: #3C8D5A; stroke-width: 2; }
+      .reg   { fill: #FFFFFF; stroke: #2F6DB5; stroke-width: 2.2; }
+      .clkt  { fill: none; stroke: #2F6DB5; stroke-width: 1.6; }
+    </style>
+  </defs>
+
+  <rect width="1180" height="650" fill="#ffffff"/>
+
+  <!-- domeniul unic -->
+  <rect x="80" y="30" width="1020" height="560" rx="14" fill="#EAF2FB" stroke="#8DB3DE" stroke-width="1.5"/>
+  <text x="590" y="572" text-anchor="middle" class="dom" fill="#2F6DB5">UN SINGUR DOMENIU DE CEAS · clk</text>
+
+  <!-- ================= calea de scriere ================= -->
+  <rect x="100" y="140" width="130" height="60" rx="8" class="comb"/>
+  <text x="165" y="166" text-anchor="middle" class="title">do_write</text>
+  <text x="165" y="186" text-anchor="middle" class="sub">wr_en &amp;&amp; !full</text>
+
+  <rect x="255" y="140" width="90" height="60" rx="8" class="comb"/>
+  <text x="300" y="170" text-anchor="middle" class="big">+1</text>
+  <text x="300" y="189" text-anchor="middle" class="sub">dacă do_write</text>
+
+  <rect x="370" y="130" width="110" height="80" rx="4" class="reg"/>
+  <text x="425" y="160" text-anchor="middle" class="title" style="font-size:17px">wptr</text>
+  <text x="425" y="179" text-anchor="middle" class="sub">registru</text>
+  <path d="M415 210 L425 198 L435 210" class="clkt"/>
+
+  <!-- ================= flag-uri ================= -->
+  <rect x="515" y="120" width="150" height="100" rx="8" class="comb"/>
+  <text x="590" y="142" text-anchor="middle" class="title" style="font-size:13px">flag-uri</text>
+  <text x="590" y="164" text-anchor="middle" class="sub">empty: wptr == rptr</text>
+  <text x="590" y="182" text-anchor="middle" class="sub">full: adrese egale</text>
+  <text x="590" y="198" text-anchor="middle" class="sub">și MSB diferit</text>
+
+  <!-- ================= calea de citire ================= -->
+  <rect x="700" y="130" width="110" height="80" rx="4" class="reg"/>
+  <text x="755" y="160" text-anchor="middle" class="title" style="font-size:17px">rptr</text>
+  <text x="755" y="179" text-anchor="middle" class="sub">registru</text>
+  <path d="M745 210 L755 198 L765 210" class="clkt"/>
+
+  <rect x="835" y="140" width="90" height="60" rx="8" class="comb"/>
+  <text x="880" y="170" text-anchor="middle" class="big">+1</text>
+  <text x="880" y="189" text-anchor="middle" class="sub">dacă do_read</text>
+
+  <rect x="950" y="140" width="130" height="60" rx="8" class="comb"/>
+  <text x="1015" y="166" text-anchor="middle" class="title">do_read</text>
+  <text x="1015" y="186" text-anchor="middle" class="sub">rd_en &amp;&amp; !empty</text>
+
+  <!-- ================= memoria ================= -->
+  <rect x="370" y="300" width="440" height="140" rx="8" fill="#ffffff" stroke="#555555" stroke-width="2"/>
+  <text x="590" y="326" text-anchor="middle" class="title" style="font-size:16px">mem</text>
+  <text x="590" y="344" text-anchor="middle" class="small">DEPTH × WIDTH biți</text>
+  <g stroke="#888888" stroke-width="1" fill="#F4F4F4">
+    <rect x="430" y="352" width="40" height="30"/><rect x="470" y="352" width="40" height="30"/>
+    <rect x="510" y="352" width="40" height="30"/><rect x="550" y="352" width="40" height="30"/>
+    <rect x="590" y="352" width="40" height="30"/><rect x="630" y="352" width="40" height="30"/>
+    <rect x="670" y="352" width="40" height="30"/><rect x="710" y="352" width="40" height="30"/>
+  </g>
+  <g class="small" text-anchor="middle">
+    <text x="450" y="372">0</text><text x="490" y="372">1</text><text x="530" y="372">2</text><text x="570" y="372">3</text>
+    <text x="610" y="372">4</text><text x="650" y="372">5</text><text x="690" y="372">6</text><text x="730" y="372">7</text>
+  </g>
+  <text x="382" y="426" class="small">scriere @ clk când we = 1</text>
+  <text x="798" y="426" text-anchor="end" class="small">rd_data = mem[raddr]</text>
+
+  <!-- ================= fire: scriere ================= -->
+  <path d="M72 170 H100" class="w" marker-end="url(#arr)"/>
+  <text x="66" y="174" text-anchor="end" class="sig">wr_en</text>
+
+  <path d="M230 170 H255" class="w" marker-end="url(#arr)"/>
+  <path d="M345 170 H370" class="w" marker-end="url(#arr)"/>
+  <path d="M395 210 V240 H300 V200" class="w" marker-end="url(#arr)"/>
+
+  <circle cx="242" cy="170" r="3.5" fill="#2b2b2b"/>
+  <path d="M242 170 V340 H370" class="w" marker-end="url(#arr)"/>
+  <text x="306" y="333" text-anchor="middle" class="sig">we</text>
+
+  <path d="M455 210 V300" class="w" marker-end="url(#arr)"/>
+  <text x="463" y="262" class="sig">waddr</text>
+
+  <path d="M72 400 H370" class="w" marker-end="url(#arr)"/>
+  <text x="66" y="404" text-anchor="end" class="sig">wr_data</text>
+
+  <!-- ================= fire: pointeri spre flag-uri ================= -->
+  <path d="M480 170 H515" class="w" marker-end="url(#arr)"/>
+  <path d="M700 170 H665" class="w" marker-end="url(#arr)"/>
+
+  <!-- full: spre port și înapoi în do_write -->
+  <path d="M545 120 V80 H72" class="w" marker-end="url(#arr)"/>
+  <circle cx="165" cy="80" r="3.5" fill="#2b2b2b"/>
+  <path d="M165 80 V140" class="w" marker-end="url(#arr)"/>
+  <text x="66" y="84" text-anchor="end" class="sig" style="font-weight:700">full</text>
+
+  <!-- empty: spre port și înapoi în do_read -->
+  <path d="M635 120 V80 H1108" class="w" marker-end="url(#arr)"/>
+  <circle cx="1015" cy="80" r="3.5" fill="#2b2b2b"/>
+  <path d="M1015 80 V140" class="w" marker-end="url(#arr)"/>
+  <text x="1114" y="84" class="sig" style="font-weight:700">empty</text>
+
+  <!-- ================= fire: citire ================= -->
+  <path d="M1108 170 H1080" class="w" marker-end="url(#arr)"/>
+  <text x="1114" y="174" class="sig">rd_en</text>
+
+  <path d="M950 170 H925" class="w" marker-end="url(#arr)"/>
+  <path d="M835 170 H810" class="w" marker-end="url(#arr)"/>
+  <path d="M785 210 V240 H880 V200" class="w" marker-end="url(#arr)"/>
+
+  <path d="M725 210 V300" class="w" marker-end="url(#arr)"/>
+  <text x="717" y="262" text-anchor="end" class="sig">raddr</text>
+
+  <path d="M810 400 H1108" class="w" marker-end="url(#arr)"/>
+  <text x="1114" y="404" class="sig">rd_data</text>
+
+  <!-- ================= ceas și reset ================= -->
+  <path d="M72 480 H110" class="w" marker-end="url(#arr)"/>
+  <text x="66" y="484" text-anchor="end" class="sig">clk</text>
+  <text x="118" y="484" class="small">la toate registrele și la memorie</text>
+  <path d="M72 510 H110" class="w" marker-end="url(#arr)"/>
+  <text x="66" y="514" text-anchor="end" class="sig">rst_n</text>
+  <text x="118" y="514" class="small">reset asincron pentru wptr și rptr</text>
+
+  <!-- ================= legendă ================= -->
+  <rect x="100" y="610" width="24" height="16" rx="3" class="comb"/>
+  <text x="132" y="623" class="small">logică combinațională</text>
+  <rect x="380" y="606" width="28" height="22" rx="2" class="reg"/>
+  <path d="M388 628 L394 620 L400 628" class="clkt"/>
+  <text x="416" y="623" class="small">registru (flip-flopuri, se actualizează pe posedge clk)</text>
+  <rect x="820" y="610" width="24" height="16" rx="3" fill="#ffffff" stroke="#555555" stroke-width="1.5"/>
+  <text x="852" y="623" class="small">memorie</text>
+</svg>

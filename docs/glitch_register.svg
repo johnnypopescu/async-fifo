@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 790" width="1040" height="790"
+     font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2F7A4D"/>
+    </marker>
+    <marker id="bad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#C0392B"/>
+    </marker>
+    <marker id="gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2b2b2b"/>
+    </marker>
+    <style>
+      .sig   { font-family: Consolas, Menlo, 'Courier New', monospace; font-size: 13px; fill: #2b2b2b; }
+      .val   { font-family: Consolas, Menlo, 'Courier New', monospace; font-size: 14px; fill: #2b2b2b; }
+      .ttl   { font-size: 15px; font-weight: 700; }
+      .small { font-size: 11.5px; fill: #555; }
+      .wave  { stroke: #2b2b2b; stroke-width: 2.2; fill: none; }
+      .bus   { stroke: #2b2b2b; stroke-width: 2; fill: #ffffff; }
+      .busr  { stroke: #2F6DB5; stroke-width: 2; fill: #EAF2FB; }
+      .edge  { stroke: #C0392B; stroke-width: 1.8; stroke-dasharray: 6 5; fill: none; }
+      .comb  { fill: #E6F4EA; stroke: #3C8D5A; stroke-width: 2; }
+      .reg   { fill: #FFFFFF; stroke: #2F6DB5; stroke-width: 2.2; }
+    </style>
+  </defs>
+
+  <rect width="1040" height="790" fill="#ffffff"/>
+
+  <!-- ======================= PARTEA 1: DE UNDE SE IA SEMNALUL ======================= -->
+  <text x="30" y="34" class="ttl" fill="#333">De unde se ia semnalul care traversează granița</text>
+
+  <rect x="40" y="56" width="110" height="54" rx="4" class="reg"/>
+  <text x="95" y="80" text-anchor="middle" class="sig" style="font-weight:700">wbin</text>
+  <text x="95" y="98" text-anchor="middle" class="small">registru</text>
+
+  <path d="M150 83 H186" class="wave" marker-end="url(#gr)"/>
+  <rect x="190" y="56" width="70" height="54" rx="8" class="comb"/>
+  <text x="225" y="88" text-anchor="middle" class="sig" style="font-weight:700">+1</text>
+
+  <path d="M260 83 H296" class="wave" marker-end="url(#gr)"/>
+  <rect x="300" y="56" width="150" height="54" rx="8" class="comb"/>
+  <text x="375" y="80" text-anchor="middle" class="sig" style="font-weight:700">^ (bin &gt;&gt; 1)</text>
+  <text x="375" y="98" text-anchor="middle" class="small">conversie Gray</text>
+
+  <path d="M450 83 H586" class="wave" marker-end="url(#gr)"/>
+  <circle cx="520" cy="83" r="4" fill="#2b2b2b"/>
+  <text x="520" y="48" text-anchor="middle" class="sig" fill="#C0392B">wgray_next</text>
+
+  <rect x="590" y="56" width="140" height="54" rx="4" class="reg"/>
+  <text x="660" y="80" text-anchor="middle" class="sig" style="font-weight:700">wptr_gray</text>
+  <text x="660" y="98" text-anchor="middle" class="small">registru</text>
+
+  <!-- granița -->
+  <line x1="800" y1="30" x2="800" y2="205" stroke="#9a9a9a" stroke-width="1.5" stroke-dasharray="7 6"/>
+  <text x="800" y="222" text-anchor="middle" class="small">graniță CDC</text>
+
+  <!-- traseul corect -->
+  <path d="M730 83 H900" stroke="#2F7A4D" stroke-width="2.4" fill="none" marker-end="url(#ok)"/>
+  <text x="906" y="80" class="small" fill="#2F7A4D" style="font-weight:700">✓ corect</text>
+  <text x="906" y="96" class="small" fill="#2F7A4D">ieșire de registru</text>
+
+  <!-- traseul greșit -->
+  <path d="M520 83 V160 H900" stroke="#C0392B" stroke-width="2.4" stroke-dasharray="7 5" fill="none" marker-end="url(#bad)"/>
+  <text x="906" y="157" class="small" fill="#C0392B" style="font-weight:700">✗ greșit</text>
+  <text x="906" y="173" class="small" fill="#C0392B">nod combinațional</text>
+
+  <!-- ======================= PARTEA 2: SEMNALELE ======================= -->
+  <line x1="30" y1="240" x2="1010" y2="240" stroke="#ddd" stroke-width="1"/>
+
+  <text x="300" y="266" text-anchor="middle" class="small">front wr_clk</text>
+  <text x="620" y="266" text-anchor="middle" class="small">front wr_clk</text>
+
+  <!-- wr_clk -->
+  <text x="150" y="300" text-anchor="end" class="sig">wr_clk</text>
+  <path d="M180 306 H300 V282 H380 V306 H620 V282 H700 V306 H900" class="wave"/>
+
+  <!-- wbin (registru) -->
+  <text x="150" y="346" text-anchor="end" class="sig">wbin</text>
+  <text x="150" y="362" text-anchor="end" class="small">registru</text>
+  <path d="M180 335 H294 L300 350 L294 365 H180 Z" class="busr"/>
+  <text x="240" y="355" text-anchor="middle" class="val">0011</text>
+  <path d="M306 335 H614 L620 350 L614 365 H306 L300 350 Z" class="busr"/>
+  <text x="460" y="355" text-anchor="middle" class="val">0100</text>
+  <path d="M626 335 H900 V365 H626 L620 350 Z" class="busr"/>
+  <text x="763" y="355" text-anchor="middle" class="val">0101</text>
+
+  <!-- wgray_next (combinațional) -->
+  <text x="150" y="406" text-anchor="end" class="sig" fill="#C0392B">wgray_next</text>
+  <text x="150" y="422" text-anchor="end" class="small" fill="#C0392B">combinațional</text>
+  <path d="M180 395 H294 L300 410 L294 425 H180 Z" class="bus"/>
+  <text x="240" y="415" text-anchor="middle" class="val">0110</text>
+
+  <!-- zona de hazard -->
+  <rect x="300" y="395" width="48" height="30" fill="#EFB4AE" stroke="#C0392B" stroke-width="1.5"/>
+  <path d="M302 410 L310 398 L318 422 L326 400 L334 420 L342 404 L346 410" stroke="#C0392B" stroke-width="1.6" fill="none"/>
+
+  <path d="M354 395 H614 L620 410 L614 425 H354 L348 410 Z" class="bus"/>
+  <text x="484" y="415" text-anchor="middle" class="val">0111</text>
+  <rect x="620" y="395" width="48" height="30" fill="#EFB4AE" stroke="#C0392B" stroke-width="1.5"/>
+  <path d="M622 410 L630 398 L638 422 L646 400 L654 420 L662 404 L666 410" stroke="#C0392B" stroke-width="1.6" fill="none"/>
+  <path d="M674 395 H900 V425 H674 L668 410 Z" class="bus"/>
+  <text x="787" y="415" text-anchor="middle" class="val">0101</text>
+
+  <text x="374" y="452" class="small" fill="#C0392B">valori tranzitorii: porțile și sumatorul comută cu întârzieri diferite</text>
+
+  <!-- wptr_gray (registru) -->
+  <text x="150" y="486" text-anchor="end" class="sig" fill="#2F6DB5">wptr_gray</text>
+  <text x="150" y="502" text-anchor="end" class="small" fill="#2F6DB5">registru</text>
+  <path d="M180 475 H294 L300 490 L294 505 H180 Z" class="busr"/>
+  <text x="240" y="495" text-anchor="middle" class="val">0010</text>
+  <path d="M306 475 H614 L620 490 L614 505 H306 L300 490 Z" class="busr"/>
+  <text x="460" y="495" text-anchor="middle" class="val">0110</text>
+  <path d="M626 475 H900 V505 H626 L620 490 Z" class="busr"/>
+  <text x="763" y="495" text-anchor="middle" class="val">0111</text>
+
+  <text x="640" y="530" class="small" fill="#2F6DB5">fără hazarde: ieșirea comută o singură dată, pe front</text>
+
+  <!-- frontul de citire -->
+  <path d="M324 274 V548" class="edge"/>
+  <text x="324" y="564" text-anchor="middle" class="small" fill="#C0392B">frontul lui rd_clk cade exact aici</text>
+
+  <!-- ======================= PARTEA 3: CE SE EȘANTIONEAZĂ ======================= -->
+  <rect x="40" y="592" width="450" height="118" rx="10" fill="#FDF3F2" stroke="#D98B85" stroke-width="1.5"/>
+  <text x="60" y="616" class="ttl" style="font-size:13.5px" fill="#B3403A">✗ VARIANTĂ GREȘITĂ — nu e în proiect</text>
+  <text x="60" y="636" class="small" fill="#B3403A">dacă peste graniță ar trece nodul combinațional wgray_next:</text>
+  <text x="60" y="660" class="small">Se eșantionează o valoare tranzitorie, de exemplu <tspan class="val" fill="#B3403A">0011</tspan>. Nu e nici</text>
+  <text x="60" y="680" class="small">valoarea veche (0110), nici cea nouă (0111).</text>
+  <text x="60" y="700" class="small">Pointer inexistent → empty și full greșite → date corupte.</text>
+
+  <rect x="550" y="592" width="450" height="118" rx="10" fill="#EEF7F0" stroke="#7FB894" stroke-width="1.5"/>
+  <text x="570" y="616" class="ttl" style="font-size:13.5px" fill="#2F7A4D">✓ AȘA E ÎN PROIECT</text>
+  <text x="570" y="636" class="small" fill="#2F7A4D">peste graniță trece registrul wptr_gray:</text>
+  <text x="570" y="660" class="small">Se eșantionează <tspan class="val" fill="#2F7A4D">0010</tspan> sau <tspan class="val" fill="#2F7A4D">0110</tspan>, după cât de aproape de front</text>
+  <text x="570" y="680" class="small">a căzut eșantionarea. Ambele au existat pe magistrală.</text>
+  <text x="570" y="700" class="small">Cel mai rău caz: afli cu un ciclu mai târziu. Zero date pierdute.</text>
+
+  <text x="40" y="746" class="small">În interiorul domeniului de scriere hazardele sunt inofensive: se sting cu mult înainte de frontul următor, iar analiza de timing garantează asta.</text>
+  <text x="40" y="766" class="small">Devin periculoase doar dacă ajung într-un domeniu cu alt ceas, care le poate eșantiona chiar în timpul tranziției.</text>
+</svg>

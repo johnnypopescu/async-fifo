@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 340" width="500" height="340"
+     font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2b2b2b"/>
+    </marker>
+    <style>
+      .in   { font-family: Consolas, Menlo, 'Courier New', monospace; font-size: 16px; font-weight: 700; fill: #2b2b2b; }
+      .out  { font-family: Consolas, Menlo, 'Courier New', monospace; font-size: 16px; font-weight: 700; fill: #7B3FB8; }
+      .eq   { font-family: Consolas, Menlo, 'Courier New', monospace; font-size: 12px; fill: #555; }
+      .note { font-size: 12px; fill: #555; }
+      .w    { stroke: #2b2b2b; stroke-width: 1.6; fill: none; }
+      .xor  { fill: #E6F4EA; stroke: #3C8D5A; stroke-width: 2; }
+      .xorl { fill: none; stroke: #3C8D5A; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="500" height="340" fill="#ffffff"/>
+
+  <!-- intrări (binar) -->
+  <text x="100" y="30" text-anchor="middle" class="in">b3</text>
+  <text x="200" y="30" text-anchor="middle" class="in">b2</text>
+  <text x="300" y="30" text-anchor="middle" class="in">b1</text>
+  <text x="400" y="30" text-anchor="middle" class="in">b0</text>
+
+  <!-- b3: direct la g3 + intrarea stângă a XOR-ului g2 -->
+  <path d="M100 40 V250" class="w" marker-end="url(#arr)"/>
+  <circle cx="100" cy="110" r="3.5" fill="#2b2b2b"/>
+  <path d="M100 110 H176 V146" class="w"/>
+
+  <!-- b2: intrarea dreaptă a lui g2 + intrarea stângă a lui g1 -->
+  <path d="M200 40 V146" class="w"/>
+  <circle cx="200" cy="110" r="3.5" fill="#2b2b2b"/>
+  <path d="M200 110 H276 V146" class="w"/>
+
+  <!-- b1: intrarea dreaptă a lui g1 + intrarea stângă a lui g0 -->
+  <path d="M300 40 V146" class="w"/>
+  <circle cx="300" cy="110" r="3.5" fill="#2b2b2b"/>
+  <path d="M300 110 H376 V146" class="w"/>
+
+  <!-- b0: intrarea dreaptă a lui g0 -->
+  <path d="M400 40 V146" class="w"/>
+
+  <!-- porți XOR (orientate în jos) -->
+  <path d="M163 142 Q188 154 213 142" class="xorl"/>
+  <path d="M163 150 Q188 162 213 150 Q213 180 188 200 Q163 180 163 150 Z" class="xor"/>
+  <path d="M263 142 Q288 154 313 142" class="xorl"/>
+  <path d="M263 150 Q288 162 313 150 Q313 180 288 200 Q263 180 263 150 Z" class="xor"/>
+  <path d="M363 142 Q388 154 413 142" class="xorl"/>
+  <path d="M363 150 Q388 162 413 150 Q413 180 388 200 Q363 180 363 150 Z" class="xor"/>
+
+  <!-- ieșiri (Gray) -->
+  <path d="M188 200 V250" class="w" marker-end="url(#arr)"/>
+  <path d="M288 200 V250" class="w" marker-end="url(#arr)"/>
+  <path d="M388 200 V250" class="w" marker-end="url(#arr)"/>
+
+  <text x="100" y="274" text-anchor="middle" class="out">g3</text>
+  <text x="188" y="274" text-anchor="middle" class="out">g2</text>
+  <text x="288" y="274" text-anchor="middle" class="out">g1</text>
+  <text x="388" y="274" text-anchor="middle" class="out">g0</text>
+
+  <text x="100" y="294" text-anchor="middle" class="eq">= b3</text>
+  <text x="188" y="294" text-anchor="middle" class="eq">= b3 ^ b2</text>
+  <text x="288" y="294" text-anchor="middle" class="eq">= b2 ^ b1</text>
+  <text x="388" y="294" text-anchor="middle" class="eq">= b1 ^ b0</text>
+
+  <text x="250" y="325" text-anchor="middle" class="note">gray = bin ^ (bin &gt;&gt; 1) — 4 bits: 3 XOR gates, the shift costs nothing</text>
+</svg>
